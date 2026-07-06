@@ -182,7 +182,7 @@ elif menu == "Memoria del proyecto":
     st.subheader("Memoria del proyecto")
     st.markdown("Visualiza la memoria completa justo debajo o descárgala en PDF:")
 
-    pdf_url = "https://raw.githubusercontent.com/marcmenendezz/impacto-economia-poblacion/main/Memoria%20Proyecto.pdf"
+    pdf_url = "https://raw.githubusercontent.com/marcmenendezz/impacto-economico-poblacion-mundial/main/docs/Memoria Proyecto.pdf"
     viewer_url = f"https://mozilla.github.io/pdf.js/web/viewer.html?file={pdf_url}"
 
     components.iframe(viewer_url, height=850, scrolling=True)
