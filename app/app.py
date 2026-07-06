@@ -23,8 +23,8 @@ def imagen_base64(path_imagen):
     with open(path_imagen, "rb") as f:
         return base64.b64encode(f.read()).decode()
 
-if os.path.exists("banner_fijo.png"):
-    banner_base64 = imagen_base64("banner_fijo.png")
+if os.path.exists("app/banner_fijo.png"):
+    banner_base64 = imagen_base64("app/banner_fijo.png")
     st.markdown(f"""
         <style>
         .stApp {{
