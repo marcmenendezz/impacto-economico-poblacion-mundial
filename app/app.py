@@ -177,33 +177,28 @@ Desde esta web se permite al usuario:
 -  Comparar el comportamiento de una variable para varios países.
     """)
 elif menu == "Memoria del proyecto":
-    import base64
-    import os
-    
+    import streamlit.components.v1 as components
     st.subheader("Memoria del proyecto")
-    
-    # Ruta al archivo físico dentro de tu repositorio
-    ruta_pdf = os.path.join("docs", "Memoria Proyecto.pdf")
-    
-    if os.path.exists(ruta_pdf):
-        # 1. Leer el archivo y codificarlo en base64 para mostrarlo
-        with open(ruta_pdf, "rb") as f:
-            base64_pdf = base64.b64encode(f.read()).decode('utf-8')
-        
-        # Incrustar el PDF de forma nativa en HTML
-        pdf_display = f'<iframe src="data:application/pdf;base64,{base64_pdf}" width="100%" height="850" type="application/pdf"></iframe>'
-        st.markdown(pdf_display, unsafe_allow_html=True)
-        
-        # 2. Botón de descarga leyendo el archivo local (mucho más rápido y sin fallos de red)
-        with open(ruta_pdf, "rb") as f:
-            st.download_button(
-                label="📥 Descargar memoria (.pdf)",
-                data=f,
-                file_name="Memoria_Proyecto.pdf",
-                mime="application/pdf"
-            )
+    st.markdown("Visualiza la memoria completa justo debajo o descárgala en PDF:")
+
+    pdf_url = "https://raw.githubusercontent.com/marcmenendezz/impacto-economico-poblacion-mundial/main/docs/Memoria Proyecto.pdf"
+    viewer_url = f"https://mozilla.github.io/pdf.js/web/viewer.html?file={pdf_url}"
+
+    components.iframe(viewer_url, height=850, scrolling=True)
+
+    # Descargar el contenido del PDF desde GitHub
+    import requests
+
+    response = requests.get(pdf_url)
+    if response.status_code == 200:
+        st.download_button(
+            label="📥 Descargar memoria (.pdf)",
+            data=response.content,
+            file_name="Memoria Proyecto.pdf",
+            mime="application/pdf"
+        )
     else:
-        st.error("❌ No se encontró el archivo de la memoria. Comprueba que está en la carpeta 'docs/'.")
+        st.error("❌ No se pudo descargar la memoria en PDF desde el servidor.")
 
 elif menu == "Análisis univariable":
     st.subheader("Análisis univariable: una variable en un país")
