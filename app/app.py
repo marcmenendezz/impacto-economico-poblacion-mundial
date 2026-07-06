@@ -277,7 +277,8 @@ elif menu == "Comparación entre países":
         "Desv. Típica": [df_p1[variable].std(), df_p2[variable].std()],
         "n": [df_p1[variable].count(), df_p2[variable].count()]
     })
-    resumen_comp.iloc[:, 1:] = resumen_comp.iloc[:, 1:].map(formatear_numero)
+    for col in resumen_comp.columns[1:]:
+        resumen_comp[col] = resumen_comp[col].apply(formatear_numero)
     st.dataframe(resumen_comp, use_container_width=True)
 
 elif menu == "Ver base de datos":
