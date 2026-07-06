@@ -177,23 +177,28 @@ Desde esta web se permite al usuario:
 -  Comparar el comportamiento de una variable para varios países.
     """)
 elif menu == "Memoria del proyecto":
-    import streamlit.components.v1 as components
     st.subheader("Memoria del proyecto")
     st.markdown("Visualiza la memoria completa justo debajo o descárgala en PDF:")
 
-    pdf_url = "https://raw.githubusercontent.com/marcmenendezz/impacto-economico-poblacion-mundial/main/docs/Memoria Proyecto.pdf"
-    viewer_url = f"https://mozilla.github.io/pdf.js/web/viewer.html?file={pdf_url}"
-
-    components.iframe(viewer_url, height=850, scrolling=True)
-
-    # Descargar el contenido del PDF desde GitHub
     import requests
+    from urllib.parse import quote
+
+    pdf_url = "https://raw.githubusercontent.com/marcmenendezz/impacto-economico-poblacion-mundial/main/docs/" + quote("Memoria Proyecto.pdf")
 
     response = requests.get(pdf_url)
     if response.status_code == 200:
+        pdf_bytes = response.content
+        base64_pdf = base64.b64encode(pdf_bytes).decode("utf-8")
+
+        pdf_display = f"""
+        <embed src="data:application/pdf;base64,{base64_pdf}"
+               width="100%" height="850" type="application/pdf">
+        """
+        st.markdown(pdf_display, unsafe_allow_html=True)
+
         st.download_button(
             label="📥 Descargar memoria (.pdf)",
-            data=response.content,
+            data=pdf_bytes,
             file_name="Memoria Proyecto.pdf",
             mime="application/pdf"
         )
