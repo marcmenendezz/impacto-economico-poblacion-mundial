@@ -147,7 +147,7 @@ section[data-testid="stSidebar"] .stRadio {
 st.markdown('<h1 style="text-align: center; font-size: 32px; color: #2c3e50;">IMPACTO DE LA ECONOMÍA EN LA POBLACIÓN MUNDIAL</h1>', unsafe_allow_html=True)
 
 # Cargar y limpiar datos
-df = pd.read_excel("/data/tabla_de_datos_sin_faltantes.xlsx")
+df = pd.read_excel("data/tabla_de_datos_sin_faltantes.xlsx")
 df.columns = df.columns.str.strip().str.lower()
 
 st.sidebar.markdown('<div class="menu-titulo"> MENÚ PRINCIPAL</div>', unsafe_allow_html=True)
