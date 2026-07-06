@@ -216,7 +216,7 @@ elif menu == "Análisis univariable":
     resumen = df_filtrado[variable].describe().to_frame().T
     resumen.columns = ['Cuenta', 'Media', 'Desv. típica', 'Mínimo', '25%', 'Mediana', '75%', 'Máximo']
     resumen.index = [pais]
-    resumen = resumen.applymap(formatear_numero)
+    resumen = resumen.map(formatear_numero)
     st.dataframe(resumen, use_container_width=True)
 
 elif menu == "Análisis multivariable":
