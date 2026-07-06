@@ -249,7 +249,7 @@ elif menu == "Análisis multivariable":
         f"Media {var_y}": [round(np.mean(y), 2)],
         "n (muestras)": [len(x)]
     })
-    resumen = resumen.applymap(formatear_numero)
+    resumen = resumen.map(formatear_numero)
     st.dataframe(resumen, use_container_width=True)
 
 elif menu == "Comparación entre países":
